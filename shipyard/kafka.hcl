@@ -40,6 +40,10 @@ container "kafka" {
       KAFKA_ZOOKEEPER_CONNECT = "zookeeper.container.shipyard.run:2181"
       ALLOW_PLAINTEXT_LISTENER = "yes"
     }
+    volume {
+      source = "./scripts"
+      destination = "/scripts"
+    }
 }
 
 container "kafka_ui" {
@@ -55,6 +59,7 @@ container "kafka_ui" {
       host = "8080"
       remote = "8080"
       local = "8080"
+      open_in_browser = "/"
     }
     
     env_var = {
