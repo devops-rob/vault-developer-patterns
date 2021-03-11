@@ -16,4 +16,9 @@ container "vault" {
       remote = "8200"
       host = "8200"
     }
+
+  volume {
+    source = "./scripts"
+    destination = "/scripts"
+  }
 }
