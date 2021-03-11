@@ -33,6 +33,18 @@ container "kafka" {
       local = "9092"
     }
 
+    // port {
+    //   host = "8083"
+    //   remote = "8083"
+    //   local = "8083"
+    // }
+
+    // port {
+    //   host = "8082"
+    //   remote = "8082"
+    //   local = "8082"
+    // }
+
     env_var = {
       KAFKA_BROKER_ID = "1"
       KAFKA_LISTENERS = "PLAINTEXT://:9092"
@@ -63,3 +75,19 @@ container "kafka_ui" {
       KAFKA_CLUSTERS_0_ZOOKEEPER="zookeeper.container.shipyard.run:2181"
     }
 }
+
+// container "kafka_rest" {
+//     network {
+//         name = "network.local"
+//     }
+
+//     image {
+//         name = "confluentinc/cp-kafka-rest"
+//     }
+
+//     port {
+//       host = "8080"
+//       remote = "8080"
+//       local = "8080"
+//     }    
+// }
