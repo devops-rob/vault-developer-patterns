@@ -11,6 +11,7 @@ exec_remote "setup_vault" {
 
   env_var = {
     VAULT_ADDR="http://localhost:8200"
+    VAULT_TOKEN="root"
   }
 
 }
@@ -26,3 +27,24 @@ exec_remote "setup_kafka" {
   cmd = "sh"
   args = ["/scripts/kafka.sh"]
 }
+
+// exec_remote "setup_rabbitmq" {
+
+//   target = "container.rabbitmq"
+
+//   image {
+//     name = "curlimages/curl:latest"
+//   }
+
+//   network {
+//     name = "network.local"
+//   }
+
+//   cmd = "sh"
+//   args = ["/scripts/rabbitmq-setup.sh"]
+  
+//   volume {
+//     source = "./scripts"
+//     destination = "/scripts"
+//   }
+// }
