@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: vault-dev
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "https://${auth0.domain}/"
+management:
+  endpoint:
+    health:
+      show-details: always
+auth0:
+  audience: ""
+  domain: ""
