@@ -7,3 +7,39 @@ Authenticates with Vault and returns a JWT
 ```
 curl localhost:8080/auth -H "Content-Type: application/json" -d '{"username": "nic", "password": "pass"}'
 ```
+
+## TOTP
+vault secrets enable totp
+
+```
+curl http://localhost:8200/v1/totp/keys/nic -H "x-vault-token: root" -d '{"generate": true, "issuer": "nics", "account_name": "jackson.nic"}' | jq
+```
+
+```
+{
+  "request_id": "bcdd71e7-ce55-62ca-ebb6-6a6dba60186e",
+  "lease_id": "",
+  "renewable": false,
+  "lease_duration": 0,
+  "data": {
+    "barcode": "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",
+    "url": "otpauth://totp/nics:jackson.nic?algorithm=SHA1&digits=6&issuer=nics&period=30&secret=WJRXKJQRL6XOMIT4CFM2H55DWJ42ROQZ"
+  },
+  "wrap_info": null,
+  "warnings": null,
+  "auth": null
+}
+```
+
+```
+echo "iVBORw0KGgoAAAANSUhEUgAAAMgAAADIEAAAAADYoy0BAAAF1klEQVR4nOyd247jNhAFPcH+/y9vngQ4jKm+0bsloOptbInk+KDVZl/oX79/vwTEP397AfJfFASGgsBQEBgKAkNBYCgIDAWBoSAwfn168eenN9i161/v30UDruvW93ev796vXr++HhGtb/p5vaOFwFAQGAoC46MPuchGgnfP0OiZvRs/mjfyFet12Xmi9UW+avp5vbQQHgoCQ0Fg3PqQi6yPiDi936iuK7vvuf6O1rdj8nlpITAUBIaCwEj5kCrdmNaO3bO8+72/G3uK1nMCLQSGgsBQEBhf8SHdmFC0z6g++3c+pzrO1OdU0EJgKAgMBYGR8iHdmNXOB0R5iCgWlI2BReN28y4Rk/2JFgJDQWAoCIxbH9L9/p3NY0T7hOy+YTreqTqwE/sVLQSGgsBQEBgffcg0zt/1Bbv7L6Y59D89fwctBIaCwFAQGLf9Iae/Z3f3FVHdVMTuumiebL6m2z9if8gDUBAYCgLjJ/MdOluHVM037O6LON3bl82/dMnmcV5aCA8FgaEgMFJ96lnfcaqfuzrfNF+Rjb1Va5az639HC4GhIDAUBEaptrf77F6ZxrTW97Przs6zrjM7/jQP9NJCeCgIDAWBkTrrpPv9PXomd3Php3xKt+ex61syaCEwFASGgsAo9YdENbHVZ3o11pRdVzRflGOP7uvuMzIxMC0EhoLAUBAYt7W9uzql0/mI3bzT/MXKNOZUrbPqnLulhcBQEBgKAqOVD1n/zvqSyEdM8w8R2fG7Nc0nztHSQmAoCAwFgTE6L+tUH3g2VtU9V7c6b3U/Up3fuqwHoSAwFATG6Oz3i2wMK8qNV561nfu7869k5+vsZ7QQGAoCQ0FgpHoM/3dTM4ddfZZXY0PVPEX1/ZM1vJ/mfWkhPBQEhoLASJ252H3GZ33HjmysqdsDWc2RZ/+e/N9aCAwFgaEgMEqxrGoNb7WWtrpfiOaP6Pqi6viVfYoWAkNBYCgIjNLvqZ96pnf7SabzZ3sVs+vJzm+f+oNREBgKAqMUy+rWXe3GXanGyLrzR/d1fU31jBfzIQ9AQWAoCIzSPqR63fTMkFO1u5FP6MbCqvMby3ogCgJDQWC08iHr6zuytbpRzns3X7UvPXvfbv7d+Nlx9CEPREFgKAiMVl3WyvSMk+i6ak1t9Ryu7LzdOjHrsh6MgsBQEBip3w+JmF6f7Ums9rufPgNlt45TNcgvLYSHgsBQEBils9+nsZ3u/dV9UDR/tm9+9/qpfZY59QegIDAUBEYplrV7PVsbG8Wkuv3eF9NY07R2OOuD7tBCYCgIDAWB0foNqhP92O9kY0On9jHd2FW0nuz/bz7kQSgIDAWB8fG8rGm9Vff7/PR8rd16onl3dOvKsvseY1kPQEFgKAiMVn/ItN+7e87UOl42RlTNxe/uz467y7uYU38gCgJDQWC08iGnamerZyBmidYbvZ4dd2Wy/7jQQmAoCAwFgTE6czHKX6xE+40ot16th/pWndepOrVPaCEwFASGgsC4/T31LNVY1Xpfdb8S+aDd/dPa4O54ldiWFgJDQWAoCIzb36Dq5tazVOuaqrnyal1YRHYfNVmXFgJDQWAoCIzbuqzsM7767J5eX6X7f2Tfj+at+BwtBIaCwFAQGK3fwg0HLdbmZql+76/2l5+ozb2bfzfeO1oIDAWBoSAwjpyXdVHtp1jv654lUu0TqfYaVn3GDmt7H4iCwFAQGEd+P2S6n8iSzbnv5snWfXVz7NF6PS/rgSgIDAWBUartXenWb0XP6mxeolvbG427e386fgYtBIaCwFAQGCkf0qWbW6+eKdLNif+pPvd1nLv7tBAYCgJDQWB8xYdU8w/ZvvId1bNPsvN964zGu/VpITAUBIaCwEj5kG7tVrWfe3rWSdTTt7v+Yhpb647zjhYCQ0FgKAiM1HlZVbp5imrfSLe2t1p7292PdHyvFgJDQWAoCIyv9IdIHy0EhoLAUBAYCgJDQWAoCAwFgaEgMBQExr8BAAD//7oGhhOyWQ+AAAAAAElFTkSuQmCC" | base64 -d > barcode.png
+```
+
+Scan barcode in 1 password or add the url `otpauth://...`
+
+Then generate a code in 1password and validate
+
+```
+curl http://localhost:8200/v1/totp/code/nic -H "x-vault-token: root" -d '{"code": "476890"}' | jq
+```
+

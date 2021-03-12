@@ -1,1 +1,3 @@
 .gradle
+app/bin
+app/build
