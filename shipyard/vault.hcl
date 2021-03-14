@@ -21,4 +21,6 @@ container "vault" {
     source = "./scripts"
     destination = "/scripts"
   }
+
+  depends_on = ["container.rabbitmq"]
 }

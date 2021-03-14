@@ -26,8 +26,9 @@ container "rabbitmq" {
     }
 
 
-
-    env_var = {
-      ALLOW_ANONYMOUS_LOGIN = "yes"
+    volume {
+        source = "./scripts"
+        destination = "/scripts"
     }
+
 }
