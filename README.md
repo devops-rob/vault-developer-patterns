@@ -1,4 +1,4 @@
-# vault-developer-patterns
+# Vault Developer Patterns
 
 This repo has a collection of Developer patterns that adoptors of HashiCorp Vault can use for reference to help solve their devloper problems. All patterns include a [Shipyard blueprint](https://shipyard.run) with all infrastructure components configured to create local development environments to run these examples.
 
