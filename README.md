@@ -9,3 +9,4 @@ This repo has a collection of Developer patterns that adoptors of HashiCorp Vaul
 
 * [RabbitMQ Message Queue Encryption at Rest](https://github.com/devops-rob/vault-developer-patterns/tree/main/rabbitmq-message-queue-encryption)
 * [One-Time Passcode implementation with Vault's TOTP Secrets Engine](https://github.com/devops-rob/vault-developer-patterns/tree/main/vault-totp-pattern)
+* [Kafka Message Encryption at Rest](https://github.com/devops-rob/vault-developer-patterns/tree/main/kafka-message-encryption)

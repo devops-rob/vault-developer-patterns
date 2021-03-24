@@ -1,0 +1,1 @@
+# Kafka Message Encryption using Vault
