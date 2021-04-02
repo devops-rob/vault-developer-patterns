@@ -9,9 +9,6 @@
 # base64
 # Kafka CLI
 ##########################################################
-# Set the following Env Vars
-TOKEN="root"
-VAULT_ADDR="http://127.0.0.1:8200/v1"
 
 # Setup Kafka Topic
 kafka-topics --bootstrap-server localhost:9092 \
@@ -21,21 +18,25 @@ kafka-topics --bootstrap-server localhost:9092 \
 
 # Encode plaintext with base64
 msg="DevOps Rob Speaking at Kafka Summit EU 2021"
+echo $msg
 payload=$(echo ${msg} | base64)
+echo $payload
 
-JSON_STRING=$( jq -n \
-    --arg pt "$payload" \
-    '{"plaintext": $pt}' )
+json_string=$(jq -n \
+--arg pt "$payload" \
+'{"plaintext": $pt}')
 
+echo $json_string
 # Encrypt payload using Kafka cryptographic key in Vault
 
 encryptedmsg=$(curl \
-    -H "X-Vault-Token: ${TOKEN}" \
+    -H "X-Vault-Token: root" \
     -X POST \
-    -d $JSON_STRING \
-    ${VAULT_ADDR}/transit/encrypt/kafka | jq -r .data.ciphertext)
+    -d "$json_string" \
+    http://127.0.0.1:8200/v1/transit/encrypt/kafka | jq -r .data.ciphertext)
 
 # Publish message to queue
+echo $encryptedmsg
 
 echo $encryptedmsg | \
     kafka-console-producer \

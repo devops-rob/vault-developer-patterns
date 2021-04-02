@@ -3,3 +3,5 @@ app/bin
 app/build
 barcode.png
 *.log
+.DS_Store
+.vscode/
